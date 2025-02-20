@@ -1,14 +1,22 @@
+import os
+
+# ✅ Manually set the environment variables before importing `llmproxy`
+os.environ["endPoint"] = "https://a061igc186.execute-api.us-east-1.amazonaws.com/dev"
+os.environ["apiKey"] = "comp150-cdr-2025s-bnc55XXanqp0HpaSYmQWSPN8M6Dj5Ad02UmQB3BS"
+
 import streamlit as st
 import requests
 import time
-import os
-from llmproxy import generate, pdf_upload   
+from llmproxy import generate, pdf_upload  
 
 # Get environment variables
 pdf_path = os.getenv("PDF_PATH", "HealingRemedies-compressed4mb.pdf")  
 api_key = os.getenv("apiKey")
 end_point = os.getenv("endPoint")
 session_id_ = os.getenv("SESSION_ID", "ambubot-home-remedies")
+# ✅ HARDCODED API CONFIGURATION
+end_point = "https://a061igc186.execute-api.us-east-1.amazonaws.com/dev"
+api_key = "comp150-cdr-2025s-bnc55XXanqp0HpaSYmQWSPN8M6Dj5Ad02UmQB3BS"
 
 
 # Initialize session state for PDF upload
@@ -299,6 +307,9 @@ def find_nearest_hospitals_osm(location):
 
 # Streamlit UI for chatbot
 def main():
+    print(f"DEBUG: end_point = {end_point}")  # Check if the endpoint is set
+    print(f"DEBUG: api_key = {api_key}")  # Check if the API key is set
+
     st.subheader("🩺 Describe Your Symptoms")
 
     if st.session_state.step == 1:
